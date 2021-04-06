@@ -59,8 +59,7 @@ def auth():
 	username = request.form.get('username')
 	password = request.form.get('password')
 
-	is_successful, user = authentication.login(username,
-password)
+	is_successful, user = authentication.login(username, password)
 	app.logger.info('%s', is_successful)
 
 	if(is_successful):
