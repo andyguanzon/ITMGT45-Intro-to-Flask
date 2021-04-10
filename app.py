@@ -152,10 +152,17 @@ def checkout():
 def ordercomplete():
     return render_template('ordercomplete.html')
 
-@app.route("/pastorders", methods=["GET"])
+@app.route('/pastorders')
 def pastorders():
-    pastorder_list = db.get_pastorders()
-    return render_template("pastorders.html", page="Past Orders",pastorder_list=pastorder_list)
+    pastorders = db.get_pastorders()
+    pastorder_list = []
+    counter1 = 0
+    for pastorder in pastorders:
+        counter1 += 1
+        for info in pastorder['details']:
+            pastorder_list.append(info)
+
+    return render_template('pastorders.html', page="Past Orders", pastorders = pastorder_list, counter1 = counter1)
 
 @app.route('/api/products', methods=['GET'])
 def api_get_products():
