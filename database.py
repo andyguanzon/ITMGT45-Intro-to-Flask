@@ -51,11 +51,7 @@ def create_order(order):
 
 def get_pastorders():
     pastorder_list = []
-    orders_coll = order_management_db["orders"]
-    orderdetails_coll = orders_coll["details"]
-
-    for order in orders_coll.find({},{"details":1}):
-        for o in order["details"]:
-            pastorder_list.append(o)
-
+    pastorders_coll = order_management_db['orders']
+    for p in pastorders_coll.find({"username": session["user"]["username"]}):
+        pastorder_list.append(p)
     return pastorder_list
